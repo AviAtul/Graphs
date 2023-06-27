@@ -1,0 +1,29 @@
+class Solution {
+public:
+    void help(vector<vector<int>>& isConnected, vector<int> &vis, int sv = 1){
+        int n = isConnected.size();
+        vis[sv] = 1; 
+        for(int i = 1; i<=n; i++){
+            if(i==sv)continue;
+            if(isConnected[sv-1][i-1]==1){
+                if(!vis[i])help(isConnected, vis, i);
+            }
+        }
+    }
+
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        int n = isConnected.size();   
+        if(n==0)return 0;
+        vector<int> vis(n+1,0);
+        int cnt = 0;
+        for(int i = 1; i<=n; i++){
+            if(!vis[i]){
+                help(isConnected, vis, i);
+                cnt++;
+            }
+        }return cnt;
+    }
+};
+
+Space Complexity: O(n)+O(n)
+Time Complexity: O(n) + Time Complexity of O(dfs) which can be O(n+2*E) if you are using a list or O(V^2) if you are using matrix
