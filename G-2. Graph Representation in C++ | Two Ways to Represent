@@ -1,0 +1,47 @@
+n nodes, m edges
+
+storing method 1: adjacency matrix way //space complexity: 0(n+1)(n+1)
+(see if node is 0-based or 1-based)
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+  int n, m;
+  cin>>n>>m;
+
+  int adj[n+1][n+1];
+  memset(adj, 0, sizeof(adj));
+  for(int i = 0; i<m; i++){
+    int u,v;
+    cin>>u>>v;
+    adj[u][v]=1;
+    adj[v][u]=1;             ////not required in directed graphs
+  }
+  return 0;
+}
+In the above method if the graph is weighted, we assign the weight to corresponding positions instead of 1
+
+
+storing method 2: list way //space complexity: 0(2*m); O(m) in case of directed graphs
+(see if node is 0-based or 1-based)
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+  int n, m;
+  cin>>n>>m;
+
+  vector<int> adj[n+1];
+  for(int i = 0; i<m; i++){
+    int u,v;
+    cin>>u>>v;
+    adj[u].push_back(v);
+    adj[v].push_back(u);       //not required in directed graphs
+  }
+  return 0;
+}
+In the above method if the graph is weighted, we assign the pair<int,int> instead of <int>
