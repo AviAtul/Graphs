@@ -1,0 +1,1 @@
+We always make a visited array in any traversal we make because graphs may or may not be connected.
