@@ -1,0 +1,22 @@
+Nodes/Vertex.
+Lines connecting nodes/vertex are edges.
+
+Undirected Graphs: If there is an edge between u and v then it means there is an edge between v and u as well. It has undirected edges.
+
+Directed Graphs: All the edges are directed. If a question explicitly mentions that a graph is directed, it is generally safe to assume that all edges in the graph are directed unless otherwise specified. The term "directed graph" implies that each edge has a specific direction, indicating the flow or relationship between vertices. It is not necessary for a directed graph to have all edges as directed. In a directed graph, also known as a digraph, each edge has a direction indicating the flow or relationship between two vertices. However, there can be cases where some edges in a directed graph are undirected or bidirectional.
+
+If we can reach the same node again then the graph is said to have a cycle.
+
+Path: Contains many nodes, each of which is reachable. A node cannot appear twice in a path. Adjacent nodes must have an edge between them.
+
+Undir
+Degree of Nodes- number of edges attached to the node
+Total Degree of graph: twice the number of edges
+
+Dir
+there will be indegree and outdegree
+Degree of Nodes- The total degree of a node in a directed graph is the sum of its in-degree and out-degree. 
+Total Degree of graph: twice the number of edges
+
+Edge Weights
+Unit weight assumed unless otherwise mentioned.
