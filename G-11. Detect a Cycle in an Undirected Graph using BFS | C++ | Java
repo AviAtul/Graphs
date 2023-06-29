@@ -1,0 +1,35 @@
+class Solution {
+  public:
+    // Function to detect cycle in an undirected graph.
+    bool check(int V, vector<int> adj[],vector<int> &visited,int sv) {
+        queue<pair<int,int>> q;
+        visited[sv] = 1;
+        q.push({sv,-1});
+        while(!q.empty()){
+            int start = q.front().first;
+            int end = q.front().second;
+            q.pop();
+            for(auto it: adj[start]){
+                if(it==end)continue;
+                if(visited[it])return true;
+                q.push({it, start});
+                visited[it] = 1;
+            }
+        }return false;
+    }
+    
+    bool isCycle(int V, vector<int> adj[]) {
+        if(V<=1)return false;
+        vector<int> visited(V,0);
+        for(int i = 0; i<V; i++){
+            if(visited[i]==0){
+                bool ans = check(V,adj,visited,i);
+                if(ans)return true;
+            }
+        }return false;
+    }
+};
+
+Time Complexity: O(N + 2E) + O(N), Where N = Nodes, 2E is for total degrees as we traverse all adjacent nodes. In the case of connected components of a graph, it will take another O(N) time.
+
+Space Complexity: O(N) + O(N) ~ O(N), Space for queue data structure and visited array.
