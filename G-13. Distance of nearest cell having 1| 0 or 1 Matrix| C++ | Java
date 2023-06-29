@@ -1,0 +1,44 @@
+class Solution 
+{
+    public:
+	vector<vector<int>>nearest(vector<vector<int>>grid)
+	{
+	    vector<vector<int>> visited(grid.size(),vector<int> (grid[0].size(),0));
+	    vector<vector<int>> answer = grid;
+	    queue<pair<int,int>> q;
+	    for(int i = 0; i<grid.size(); i++){
+	        for(int j = 0; j<grid[0].size(); j++){
+	            if(grid[i][j]==1){
+	                q.push({i,j});
+	                visited[i][j] = 1;
+	                answer[i][j] = 0;
+	            }
+	        }
+	    }int cycle = 1;
+	    while(!q.empty()){
+	        int size = q.size();
+	        while(size!=0){
+	            int r = q.front().first;
+	            int c = q.front().second;
+                q.pop();
+    	        vector<pair<int, int>> dirs = {{1, 0},{-1, 0},{0, -1},{0, 1}};
+    	        for (auto dir : dirs){
+    	            int nrow = r+dir.first;
+    	            int ncol = c+dir.second;
+    	            if(nrow<0 || nrow >= grid.size() || ncol<0 || ncol >= grid[0].size())continue;
+    	            if(visited[nrow][ncol]==1)continue;
+    	            if(grid[nrow][ncol]==0){
+    	                answer[nrow][ncol] = cycle;
+    	                visited[nrow][ncol] = 1;
+    	                q.push({nrow, ncol});
+    	            }
+    	        }size--;
+	        }cycle++;
+	    }return answer;
+	}
+};
+Time Complexity: O(NxM + NxMx4) ~ O(N x M)
+For the worst case, the BFS function will be called for (N x M) nodes, and for every node, we are traversing for 4 neighbors, so it will take O(N x M x 4) time.
+
+Space Complexity: O(N x M) + O(N x M) + O(N x M) ~ O(N x M)
+O(N x M) for the visited array, distance matrix, and queue space takes up N x M locations at max. 
