@@ -1,0 +1,39 @@
+Color the graph with 2 colors such that no adjacent nodes have same color
+Linear graphs with no cycle are always bipartite
+Any graph with an even cycle length can also be bipartite
+
+Any graph with an odd cycle length can never be a bipartite
+
+class Solution {
+private:
+    bool check(vector<vector<int>>& graph,vector<int> &color, int sv){
+        queue<int> q;
+        q.push(sv);
+        color[sv] = 0;
+        while(!q.empty()){
+            int start = q.front();
+            q.pop();
+            for(auto i: graph[start]){
+                if(color[i]==-1){
+                        color[i]= !color[start];
+                        q.push(i);
+                }else if(color[i]==color[start])return false;
+            }
+        }return true;
+    }
+public:
+    bool isBipartite(vector<vector<int>>& graph) {
+        if(graph.size()<=2)return true;
+        vector<int> color(graph.size(),-1);
+        for(int i = 0; i<graph.size(); i++){
+            if(color[i]==-1){
+                if(!check(graph,color,i))return false;
+            }
+        }return true;
+        
+    }
+};
+
+Time Complexity: O(V + 2E), Where V = Vertices, 2E is for total degrees as we traverse all adjacent nodes.
+
+Space Complexity: O(3V) ~ O(V), Space for DFS stack space, colour array and an adjacency list.
