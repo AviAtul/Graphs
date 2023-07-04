@@ -1,0 +1,31 @@
+Indegree: Number of incoming edges to that node
+
+-Insert all nodes with indegree 0
+-Take them out of queue and update the indegrees
+
+class Solution
+{
+	public:
+	//Function to return list containing vertices in Topological order. 
+	vector<int> topoSort(int V, vector<int> adj[]) 
+	{   vector<int> tpSort;
+	    vector<int> indegree(V, 0);
+	    for(int i = 0; i<V; i++){
+	        for(auto node: adj[i]){
+	            indegree[node]++;
+	        }
+	    }queue<int> q;
+	    for(int i = 0; i<V; i++){
+	        if(indegree[i]==0)q.push(i);
+	    }while(!q.empty()){
+	        int node = q.front();
+	        q.pop();
+	        tpSort.push_back(node);
+	        
+	        for(auto it: adj[node]){
+	            indegree[it]--;
+	            if(indegree[it]==0)q.push(it);
+	        }
+	    }return tpSort;
+	}
+};
