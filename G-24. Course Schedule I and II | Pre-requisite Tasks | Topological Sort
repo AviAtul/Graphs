@@ -1,0 +1,60 @@
+Course Schedule I (Leetcode):
+class Solution {
+public:
+    bool canFinish(int V, vector<vector<int>>& prerequisites) {
+        vector<int> adj[V];
+        for(auto it: prerequisites){
+            adj[it[1]].push_back(it[0]);
+        }vector<int> tpSort;
+	    vector<int> indegree(V, 0);
+	    for(int i = 0; i<V; i++){
+	        for(auto node: adj[i]){
+	            indegree[node]++;
+	        }
+	    }queue<int> q;
+	    for(int i = 0; i<V; i++){
+	        if(indegree[i]==0)q.push(i);
+	    }while(!q.empty()){
+	        int node = q.front();
+	        q.pop();
+	        tpSort.push_back(node);
+	        
+	        for(auto it: adj[node]){
+	            indegree[it]--;
+	            if(indegree[it]==0)q.push(it);
+	        }
+	    }if(tpSort.size()==V)return true;
+        return false;
+    }
+};
+
+Course schedule II(Leetcode):
+class Solution {
+public:
+    vector<int> findOrder(int V, vector<vector<int>>& prerequisites) {
+        vector<int> adj[V];
+        for(auto it: prerequisites){
+            adj[it[1]].push_back(it[0]);
+        }vector<int> tpSort;
+	    vector<int> indegree(V, 0);
+	    for(int i = 0; i<V; i++){
+	        for(auto node: adj[i]){
+	            indegree[node]++;
+	        }
+	    }queue<int> q;
+	    for(int i = 0; i<V; i++){
+	        if(indegree[i]==0)q.push(i);
+	    }while(!q.empty()){
+	        int node = q.front();
+	        q.pop();
+	        tpSort.push_back(node);
+	        
+	        for(auto it: adj[node]){
+	            indegree[it]--;
+	            if(indegree[it]==0)q.push(it);
+	        }
+	    }if(tpSort.size()==V)return tpSort;
+        return {};
+    }
+};
+    
